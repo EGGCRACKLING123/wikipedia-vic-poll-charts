@@ -74,10 +74,10 @@ tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = e
 
 ppm <- ggplot(pp2226, aes(x=as.Date(date, '%d-%b-%y'))) +
   theme_bw() +
-  geom_point(aes(y=albanese), colour="red3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=albanese, colour="Allan"), span = spansize, se = FALSE) +
-  geom_point(aes(y=dutton), colour="blue4", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=dutton, colour="Battin"), span = spansize, se = FALSE) +
+  geom_point(aes(y=allan), colour="red3", size=2.5, alpha = 3/10) +
+  geom_smooth(aes(y=allan, colour="Allan"), span = spansize, se = FALSE) +
+  geom_point(aes(y=battin), colour="blue4", size=2.5, alpha = 3/10) +
+  geom_smooth(aes(y=battin, colour="Battin"), span = spansize, se = FALSE) +
   geom_point(aes(y=unknown), colour="grey20", size=2.5, alpha = 3/10) +
   geom_smooth(aes(y=unknown, colour="Unknown"), span = spansize, se = FALSE) +
   scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
