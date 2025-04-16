@@ -5,7 +5,6 @@ setwd("~/Documents/GitHub/Vic-poll-Charts") # replace with your own working dire
 polling2226 <- read.csv("polling2226.csv")
 pp2226 <- read.csv("pp2226.csv")
 allansat <- read.csv("allan_sat2226.csv")
-battinsat <- read.csv("battin_sat2226.csv")
 spansize <- 0.2
 
 election22 <- data.frame(c("LNP","ALP","GRN","OTH"), c(34.4,37.0,11.5,17.1))
@@ -108,20 +107,3 @@ alp_sat <- ggplot(allansat, aes(x=as.Date(date, '%d-%b-%y'))) +
                       values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
 alp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
 
-lnp_sat <- ggplot(battinsat, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="% satisfaction", x= NULL, title = "Brad Battin approval rating") +
-  scale_colour_manual(name="",
-                      breaks = c("Satisfied", "Dissatisfied", "Don't Know"),
-                     labels = c("Satisfied", "Dissatisfied", "Don't Know"),
-                     values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
-lnp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
