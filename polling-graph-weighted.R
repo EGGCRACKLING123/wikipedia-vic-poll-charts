@@ -3,8 +3,6 @@ library(dplyr)
 library(lubridate)
 setwd("~/Documents/GitHub/Vic-poll-Charts") # replace with your own working directory
 polling2226 <- read.csv("polling2226.csv")
-pp2226 <- read.csv("pp2226.csv")
-allansat <- read.csv("allan_sat2226.csv")
 spansize <- 0.2
 
 election22 <- data.frame(c("LNP","ALP","GRN","OTH"), c(34.4,37.0,11.5,17.1))
@@ -71,39 +69,3 @@ tpp <- ggplot(polling2226, aes(x=as.Date(last_date, '%d %b %Y'))) +
 tpp + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12)) +
   guides(colour = guide_legend(order=1, override.aes = list(size = 0, shape = 15)), size = guide_legend(order=2)) +
   scale_size_area(name = "Sample size:")
-
-ppm <- ggplot(pp2226, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=allan), colour="red3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=allan, colour="Allan"), span = spansize, se = FALSE) +
-  geom_point(aes(y=battin), colour="blue4", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=battin, colour="Battin"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="grey20", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Unknown"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(10, 20, 30, 40, 50, 60), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="Support (%)", x= NULL) +
-  scale_colour_manual(name="",
-                     labels = c("Allan", "Battin", "Don't Know"),
-                     values = c("Allan"="red3", "Battin"="blue4", "Unknown" = "grey60"))
-ppm + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
-
-alp_sat <- ggplot(allansat, aes(x=as.Date(date, '%d-%b-%y'))) +
-  theme_bw() +
-  geom_point(aes(y=satisfied), colour="#02e03d", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=satisfied, colour="Satisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=dissatisfied), colour="#f74888", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=dissatisfied, colour="Dissatisfied"), span = spansize, se = FALSE) +
-  geom_point(aes(y=unknown), colour="#b3b3b3", size=2.5, alpha = 3/10) +
-  geom_smooth(aes(y=unknown, colour="Don't Know"), span = spansize, se = FALSE) +
-  scale_y_continuous(limits=c(0, 70), breaks = c(0, 10, 20, 30, 40, 50, 60, 70), minor_breaks = NULL, expand = c(0,0)) +
-  scale_x_date(date_breaks = "1 month", date_labels = "%b %Y", minor_breaks = NULL) +
-  theme(axis.text.x = element_text(angle=45, vjust=0.5, size=12), axis.text.y = element_text(size=12), axis.title.y = element_text(size=14)) +
-  labs(y="% satisfaction", x= NULL, title = "Jacinta Allan approval rating") +
-  scale_colour_manual(name="",
-                      breaks = c("Satisfied", "Dissatisfied", "Don't Know"),
-                      labels = c("Satisfied", "Dissatisfied", "Don't Know"),
-                      values = c("Satisfied"="#02e03d", "Dissatisfied"="#f74888", "Don't Know" = "#b3b3b3"))
-alp_sat + theme(legend.position="bottom", legend.box = "horizontal", legend.text = element_text(size=12))
-
